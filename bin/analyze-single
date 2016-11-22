@@ -1,0 +1,22 @@
+#!/usr/bin/env perl6
+use v6.c;
+use Stock::Stuff;
+use Stats;
+use Statistics::LinearRegression;
+
+sub MAIN($csv-file) {
+    my @costs = load($csv-file);    
+    my $*sl-size = 15;
+    my @l = @costs[^15].map(*.close);
+    "Rising in interval?".say;
+    "0 – 500:".say;
+    analyze(@costs[0..500]).say;
+    my ($a, $b) = get-parameters ^500,@costs[^500].map: *.close;
+    say $a > 0;
+    "1500 – 2000:".say;
+    analyze(@costs[1500..2000]).say;
+    ($a, $b) = get-parameters 1500..^2000,@costs[1500..^2000].map: *.close;
+    say $a > 0;
+    $*sl-size = 200;
+    find-anomaly(@costs);
+}

@@ -1,0 +1,23 @@
+#!/usr/bin/env perl6
+use v6.c;
+use Stock::Stuff;
+use Stats;
+
+sub MAIN($csv-file1, $csv-file2, :$start, :$stop) {
+    my @costs1 = load($csv-file1);
+    my @costs2 = load($csv-file2);
+
+    with $start {
+        @costs1.=grep: { $^a.date after Date.new($start)} ;
+        @costs2.=grep: { $^a.date after Date.new($start)} ;
+    }
+    with $stop {
+        @costs1.=grep: { $^a.date before Date.new($stop)};
+        @costs2.=grep: { $^a.date before Date.new($stop)};
+    }
+    my @c1 = @costs1.map: *.close;
+    my @c2 = @costs2.map: *.close;
+
+    say correlate(@c1, @c2);
+
+}

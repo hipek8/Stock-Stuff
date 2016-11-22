@@ -1,0 +1,27 @@
+#!/usr/bin/env perl6
+use v6.c;
+use Stock::Stuff;
+use Stats;
+use Statistics::LinearRegression;
+use Matplotlib;
+
+sub MAIN($csv-file, :$start, :$stop) {
+    my @costs = load($csv-file);
+    with $start {
+        @costs.=grep: { $^a.date after Date.new($start)} ;
+    }
+    with $stop {
+        @costs.=grep: { $^a.date before Date.new($stop)};
+    }
+    my @x = 1..(@costs.elems);
+    my @y = @costs.map: *.close;
+    my $lr = LR.new(@x,@y);
+    my @y-line = gather for @x { $lr.at($_).take; };
+
+    given Matplotlib.new -> $p {
+        $p.plot([@x, @y]);
+        $p.plot([@x, @y-line]);
+        $p.title("Stock value of $csv-file {"between $start and $stop" with $start and $stop}") ;
+        $p.show;
+    }
+}
