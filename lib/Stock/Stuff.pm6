@@ -86,10 +86,6 @@ Check correlation coefficents between 2 companies
 
   perl6 -Ilib/ bin/correlate <csv-file1> <csv-file2>
 
-=head1 DESCRIPTION
-
-Stock::Stuff is ...
-
 =head1 AUTHOR
 
 Paweł Szulc <pawel_szulc@onet.pl>

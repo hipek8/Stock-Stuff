@@ -17,7 +17,7 @@
     "Stock::Stuff" : "lib/Stock/Stuff.pm6"
   },
   "resources" : [ ],
-  "source-url" : "",
+  "source-url" : "git://github.com/hipek8/Stock-Stuff.git",
   "test-depends" : [ ],
   "version" : "v1.0.0"
 }

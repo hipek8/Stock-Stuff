@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hipek8/Stock-Stuff.svg?branch=master)](https://travis-ci.org/hipek8/Stock-Stuff)
+
 NAME
 ====
 
@@ -25,11 +27,6 @@ You might want to plot values between some dates
 Check correlation coefficents between 2 companies
 
     perl6 -Ilib/ bin/correlate <csv-file1> <csv-file2>
-
-DESCRIPTION
-===========
-
-Stock::Stuff is ...
 
 AUTHOR
 ======
